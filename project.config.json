@@ -13,8 +13,9 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.4.3",
-	"appid": "wx4155a05571e1b21d",
+	"appid": "wxe4cb83df71f2ab4e",
 	"projectname": "wxapp01",
+  "cloudfunctionRoot": "cloudservice/",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

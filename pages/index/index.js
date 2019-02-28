@@ -8,12 +8,38 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     inputShowed: false,
-    inputVal: ""
+    inputVal: "",
+    background: ['../../images/init_1.jpg', '../../images/init_2.jpg', '../../images/init_3.jpg'],
+    indicatorDots: true,
+    vertical: false,
+    autoplay: false,
+    interval: 2000,
+    duration: 500
+  },
+  changeIndicatorDots: function (e) {
+    this.setData({
+      indicatorDots: !this.data.indicatorDots
+    })
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
+    })
+  },
+  changeAutoplay: function (e) {
+    this.setData({
+      autoplay: !this.data.autoplay
+    })
+  },
+  intervalChange: function (e) {
+    this.setData({
+      interval: e.detail.value
+    })
+  },
+  durationChange: function (e) {
+    this.setData({
+      duration: e.detail.value
     })
   },
   onLoad: function() {
