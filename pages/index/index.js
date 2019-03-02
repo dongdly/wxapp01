@@ -14,7 +14,7 @@ Page({
     vertical: false,
     autoplay: false,
     interval: 2000,
-    duration: 500
+    duration: 500,
   },
   changeIndicatorDots: function (e) {
     this.setData({
@@ -115,25 +115,24 @@ Page({
     var that = this;
     wx.chooseImage({
       count: 1,
-      success: function (res) {
+      sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      success: chooseResult => {
         // 这里无论用户是从相册选择还是直接用相机拍摄，拍摄完成后的图片临时路径都会传递进来
-        app.startOperating("保存中")
-        var filePath = res.tempFilePaths[0];
-        var session_key = wx.getStorageSync('session_key');
-        // 这里顺道展示一下如何将上传上来的文件返回给后端，就是调用wx.uploadFile函数
-        wx.uploadFile({
-          url: app.globalData.url + '/home/upload/uploadFile/session_key/' + session_key,
-          filePath: filePath,
-          name: 'file',
-          success: function (res) {
-            app.stopOperating();
-            // 下面的处理其实是跟我自己的业务逻辑有关
-            var data = JSON.parse(res.data);
-            if (parseInt(data.status) === 1) {
-              app.showSuccess('文件保存成功');
-            } else {
-              app.showError("文件保存失败");
-            }
+        var cloudPath = 'images/';
+        var tmpFilePath = chooseResult.tempFilePaths[0]
+        wx.cloud.uploadFile({
+          // 指定上传到的云路径
+          cloudPath: cloudPath.concat(tmpFilePath.substring(tmpFilePath.lastIndexOf(".") - 10)),
+          // 指定要上传的文件的小程序临时文件路径
+          filePath: chooseResult.tempFilePaths[0],
+          // 成功回调
+          success: res => {
+            console.log(cloudPath.concat(' 上传成功'), res)
+          },
+          fail: err => {
+            // handle error
+            console.log(cloudPath.concat(' 上传失败'), res)
           }
         })
       },

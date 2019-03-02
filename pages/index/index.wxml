@@ -91,4 +91,4 @@
       <slider bindchange="intervalChange" value="{{interval}}" min="2000" max="10000"/>
     </view>
   </view>
-<button type="primary" bindtap="getLocalImage" class="button_anniu">点击选择相册</button>
+<button type="primary" size="mini" bindtap="getLocalImage" class="button_anniu">点击选择相册</button>

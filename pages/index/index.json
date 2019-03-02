@@ -1,16 +1,3 @@
 {
-  "imgUrls":[
-    {
-      "url": "init.jpg",
-      "isChange": 1
-    },
-    {
-      "url": "init.jpg",
-      "isChange": 2
-    },
-    {
-      "url": "./../../images/init.jpg",
-      "isChange": 3
-    }],
   "usingComponents": {}
 }
